@@ -21,9 +21,7 @@ public class UnicastRemoteObject implements Remote, java.io.Serializable {
     }
 
     public static Remote exportObject(Remote obj, int port) throws RemoteException {
-
-
-        return exportObject(obj, "127.0.0.1", port);
+        return exportObject(obj, Util.defaultBindingHost, port);
     }
 
     /**
@@ -42,6 +40,7 @@ public class UnicastRemoteObject implements Remote, java.io.Serializable {
             while (skeleton.getPort() == 0) ;
             ref.setPort(skeleton.getPort());
         }
+        System.out.printf("exportObject to %s:%d\n", host, skeleton.getPort());
         return Util.createStub(ref);
     }
 }

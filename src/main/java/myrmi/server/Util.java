@@ -4,9 +4,14 @@ import myrmi.Remote;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class Util {
-
+    public static final String defaultBindingHost = "0.0.0.0";
+    public static final String defaultAccessingHost = "host.docker.internal";
+//    public static final String defaultAccessingHost = "localhost";
+    public static final int defaultBindingPort = 1200;
 
     public static Remote createStub(RemoteObjectRef ref) {
         try {

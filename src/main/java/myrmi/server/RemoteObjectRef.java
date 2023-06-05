@@ -6,12 +6,8 @@ import java.io.Serializable;
 
 public class RemoteObjectRef implements Serializable, Remote {
     private String host;
-
-
     private int port;
     private int objectKey;
-
-
     private String interfaceName;
 
     public String getHost() {
@@ -47,7 +43,6 @@ public class RemoteObjectRef implements Serializable, Remote {
         this.objectKey = ref.objectKey;
         this.interfaceName = ref.interfaceName;
     }
-
 
     @Override
     public String toString() {

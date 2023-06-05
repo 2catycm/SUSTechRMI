@@ -26,9 +26,8 @@ public class RegistryStubInvocationHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws RemoteException, AlreadyBoundException, NotBoundException, Throwable {
         Object result;
         try {
-
             result = method.invoke(this.registryStub, args);
-System.out.println("RegistryStub "+"Invoke "+method.getName());
+            System.out.println("RegistryStub " + "Invoke " + method.getName());
         } catch (InvocationTargetException e) {
             throw e.getCause();
         }

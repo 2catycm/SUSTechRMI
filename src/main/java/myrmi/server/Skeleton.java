@@ -11,9 +11,8 @@ import java.net.SocketException;
 public class Skeleton extends Thread {
     static final int BACKLOG = 5;
     private Remote remoteObj;
-
     private String host;
-    private int port;
+    private volatile int port;
     private int objectKey;
 
     public int getPort() {
@@ -37,7 +36,6 @@ public class Skeleton extends Thread {
     public void run() {
         try {
             ServerSocket serverSoc = new ServerSocket(this.port, BACKLOG, InetAddress.getByName(this.host));
-
             this.port = serverSoc.getLocalPort();
             System.out.printf("Skeleton created on port %d\n", this.port);
             while (true) {
