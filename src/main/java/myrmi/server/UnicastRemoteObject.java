@@ -40,7 +40,6 @@ public class UnicastRemoteObject implements Remote, java.io.Serializable {
             while (skeleton.getPort() == 0) ;
             ref.setPort(skeleton.getPort());
         }
-        System.out.printf("exportObject to %s:%d\n", host, skeleton.getPort());
         return Util.createStub(ref);
     }
 }

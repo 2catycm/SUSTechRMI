@@ -43,7 +43,7 @@ public class LocateRegistry {
             port = Registry.REGISTRY_PORT;
         }
         Registry registry = new RegistryImpl(port);
-        return (Registry) Proxy.newProxyInstance(Registry.class.getClassLoader(), new Class<?>[]{Registry.class}, new RegistryStubInvocationHandler("127.0.0.1", port));
+        return (Registry) Proxy.newProxyInstance(Registry.class.getClassLoader(), new Class<?>[]{Registry.class}, new RegistryStubInvocationHandler(Util.defaultBindingHost, port));
     }
 
     public static Registry createRegistry(String host, int port) throws RemoteException {

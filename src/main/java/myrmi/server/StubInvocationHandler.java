@@ -29,8 +29,10 @@ public class StubInvocationHandler implements InvocationHandler, Serializable {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws RemoteException, IOException, ClassNotFoundException, Throwable {
+//        Socket socket = new Socket(Util.defaultAccessingHost, port);
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress(host, port));
+        System.out.printf("connect to %s:%d\n", host, port);
+        socket.connect(new InetSocketAddress(Util.defaultAccessingHost, port));
         ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
 
