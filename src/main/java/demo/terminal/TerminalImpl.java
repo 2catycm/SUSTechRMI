@@ -10,7 +10,7 @@ import java.util.Scanner;
 import myrmi.exception.RemoteException;
 
 public class TerminalImpl implements Terminal {
-    protected TerminalImpl() throws RemoteException {
+    public TerminalImpl() throws RemoteException {
         super();
     }
 
@@ -20,13 +20,18 @@ public class TerminalImpl implements Terminal {
 
     public String checkOutput(String command) throws IOException {
         final Process process = Runtime.getRuntime().exec(command);
-        try (Scanner scanner = new Scanner(new BufferedInputStream(process.getInputStream()))) {
-            final ArrayList<String> result = new ArrayList<>();
-            while (scanner.hasNextLine()) {
-                result.add(scanner.nextLine());
+        StringBuilder result = new StringBuilder();
+        try (Scanner outputScanner = new Scanner(new BufferedInputStream(process.getInputStream()));
+            Scanner errorScanner = new Scanner(new BufferedInputStream(process.getErrorStream()))
+        ) {
+            while (outputScanner.hasNextLine()) {
+                result.append(outputScanner.nextLine()).append("\n");
             }
-            return String.join("\n", result);
+            while (errorScanner.hasNextLine()) {
+                result.append(errorScanner.nextLine()).append("\n");
+            }
         }
+        return result.toString();
         // final ProcessBuilder builder = new ProcessBuilder(command.split("\\s+"));
         // builder.redirectErrorStream(true);
         // builder.inheritIO();
