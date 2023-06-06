@@ -1,4 +1,4 @@
-package demo;
+package demo.payment;
 
 import myrmi.exception.RemoteException;
 

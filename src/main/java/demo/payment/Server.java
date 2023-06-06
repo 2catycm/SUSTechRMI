@@ -1,4 +1,4 @@
-package demo;
+package demo.payment;
 
 import myrmi.registry.LocateRegistry;
 import myrmi.registry.Registry;

@@ -35,16 +35,17 @@ public class Skeleton extends Thread {
     @Override
     public void run() {
         try {
-            ServerSocket serverSoc = new ServerSocket(this.port, BACKLOG, InetAddress.getByName(this.host));
-            this.port = serverSoc.getLocalPort();
-            System.out.printf("Skeleton created on port %d\n", this.port);
-            while (true) {
-                try {
-                    Socket socket = serverSoc.accept();
-                    // System.out.println("New invocation received on port "+this.port);
-                    new SkeletonReqHandler(socket, this.remoteObj, this.objectKey).start();
-                } catch (SocketException ignored) {
-                    // ignore connection reset by other side
+            try (ServerSocket serverSoc = new ServerSocket(this.port, BACKLOG, InetAddress.getByName(this.host))) {
+                this.port = serverSoc.getLocalPort();
+                System.out.printf("Skeleton created on port %d\n", this.port);
+                while (true) {
+                    try {
+                        Socket socket = serverSoc.accept();
+                        // System.out.println("New invocation received on port "+this.port);
+                        new SkeletonReqHandler(socket, this.remoteObj, this.objectKey).start();
+                    } catch (SocketException ignored) {
+                        // ignore connection reset by other side
+                    }
                 }
             }
         } catch (IOException e) {

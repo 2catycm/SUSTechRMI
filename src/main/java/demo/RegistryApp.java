@@ -3,7 +3,7 @@ package demo;
 import myrmi.exception.RemoteException;
 import myrmi.registry.LocateRegistry;
 
-public class Registry {
+public class RegistryApp {
     public static void main(String args[]) {
         try {
             LocateRegistry.createRegistry();
