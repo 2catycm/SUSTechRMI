@@ -3,7 +3,6 @@ package myrmi.server;
 import myrmi.Remote;
 import myrmi.exception.RemoteException;
 
-
 public class UnicastRemoteObject implements Remote, java.io.Serializable {
     int port;
 
@@ -21,7 +20,7 @@ public class UnicastRemoteObject implements Remote, java.io.Serializable {
     }
 
     public static Remote exportObject(Remote obj, int port) throws RemoteException {
-        return exportObject(obj, Util.defaultBindingHost, port);
+        return exportObject(obj, Util.serverSupposeRemoteObjectAtHost, port);
     }
 
     /**
@@ -37,7 +36,8 @@ public class UnicastRemoteObject implements Remote, java.io.Serializable {
         skeleton.start();
         if (port == 0) {
             // busy waiting here until port is allocated
-            while (skeleton.getPort() == 0) ;
+            while (skeleton.getPort() == 0)
+                ;
             ref.setPort(skeleton.getPort());
         }
         return Util.createStub(ref);

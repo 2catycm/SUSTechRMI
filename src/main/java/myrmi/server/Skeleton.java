@@ -41,7 +41,7 @@ public class Skeleton extends Thread {
             while (true) {
                 try {
                     Socket socket = serverSoc.accept();
-                    //System.out.println("New invocation received on port "+this.port);
+                    // System.out.println("New invocation received on port "+this.port);
                     new SkeletonReqHandler(socket, this.remoteObj, this.objectKey).start();
                 } catch (SocketException ignored) {
                     // ignore connection reset by other side

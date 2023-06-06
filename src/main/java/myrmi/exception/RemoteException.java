@@ -1,4 +1,4 @@
 package myrmi.exception;
 
-public class RemoteException extends java.io.IOException{
+public class RemoteException extends java.io.IOException {
 }

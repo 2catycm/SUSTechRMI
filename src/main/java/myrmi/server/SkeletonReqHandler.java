@@ -62,7 +62,6 @@ public class SkeletonReqHandler extends Thread {
                         System.out.println("Skeleton: Invoke void method " + methodName + " success");
                         out.writeInt(1);
 
-
                     } else {
 
                         result = m.invoke(this.obj, args);
@@ -71,7 +70,6 @@ public class SkeletonReqHandler extends Thread {
                         out.writeObject(result);
                     }
                 }
-
 
             } catch (InvocationTargetException e) {
                 // if exception thrown, return the exception

@@ -28,11 +28,12 @@ public class StubInvocationHandler implements InvocationHandler, Serializable {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws RemoteException, IOException, ClassNotFoundException, Throwable {
-//        Socket socket = new Socket(Util.defaultAccessingHost, port);
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws RemoteException, IOException, ClassNotFoundException, Throwable {
+        // Socket socket = new Socket(Util.defaultAccessingHost, port);
         Socket socket = new Socket();
         System.out.printf("connect to %s:%d\n", host, port);
-        socket.connect(new InetSocketAddress(Util.defaultAccessingHost, port));
+        socket.connect(new InetSocketAddress(Util.clientSupposeRemoteObjectAtHost, port));
         ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
 
@@ -40,15 +41,15 @@ public class StubInvocationHandler implements InvocationHandler, Serializable {
         output.writeUTF(method.getName());
         output.writeObject(method.getParameterTypes());
         output.writeObject(args);
-        System.out.println(">>> StubInvocationHanlder invoking: "+method.getName());
+        System.out.println(">>> StubInvocationHanlder invoking: " + method.getName());
         int retCode = input.readInt();
-        System.out.println("<<< Finished, code: "+retCode);
+        System.out.println("<<< Finished, code: " + retCode);
         if (retCode == 1) {
-            //void method
+            // void method
             return null;
         }
         if (retCode == -1) {
-            //error in remote invocation
+            // error in remote invocation
             throw new RemoteException();
         }
         Object result = input.readObject();

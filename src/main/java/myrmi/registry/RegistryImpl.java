@@ -21,7 +21,7 @@ public class RegistryImpl implements Registry {
      * and create a skeleton on given port
      **/
     public RegistryImpl(int port) throws RemoteException {
-        Skeleton skeleton = new Skeleton(this, Util.defaultBindingHost, port, 0);
+        Skeleton skeleton = new Skeleton(this, Util.serverSupposeRemoteObjectAtHost, port, 0);
         skeleton.start();
     }
 
@@ -73,17 +73,17 @@ public class RegistryImpl implements Registry {
         return keys.toArray(new String[keys.size()]);
     }
 
-//    public static void main(String args[]) {
-//        final int regPort = (args.length >= 1) ? Integer.parseInt(args[0])
-//                : Registry.REGISTRY_PORT;
-//        RegistryImpl registry;
-//        try {
-//            registry = new RegistryImpl(regPort);
-//        } catch (RemoteException e) {
-//            System.exit(1);
-//        }
-//
-//        System.out.printf("RMI Registry is listening on port %d\n", regPort);
-//
-//    }
+    // public static void main(String args[]) {
+    // final int regPort = (args.length >= 1) ? Integer.parseInt(args[0])
+    // : Registry.REGISTRY_PORT;
+    // RegistryImpl registry;
+    // try {
+    // registry = new RegistryImpl(regPort);
+    // } catch (RemoteException e) {
+    // System.exit(1);
+    // }
+    //
+    // System.out.printf("RMI Registry is listening on port %d\n", regPort);
+    //
+    // }
 }

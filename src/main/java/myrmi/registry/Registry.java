@@ -11,7 +11,6 @@ public interface Registry extends Remote {
     int REGISTRY_PORT = 11099;
     HashMap<String, Remote> bindings = new HashMap<>();
 
-
     public Remote lookup(String name) throws RemoteException, NotBoundException;
 
     public void bind(String name, Remote obj) throws RemoteException, AlreadyBoundException;
@@ -21,6 +20,5 @@ public interface Registry extends Remote {
     public void rebind(String name, Remote obj) throws RemoteException;
 
     public String[] list() throws RemoteException;
-
 
 }
